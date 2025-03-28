@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.quieroestarcontigo.shadowwork.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.quieroestarcontigo.shadowwork.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.quieroestarcontigo.shadowwork.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/navigation_dreams"
+        android:name="com.quieroestarcontigo.shadowwork.ui.dreams.DreamFragment"
+        android:label="Dreams"
+        tools:layout="@layout/fragment_dream" >
+        <action
+            android:id="@+id/action_dreamFragment_to_addDreamFragment"
+            app:destination="@id/addDreamFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addDreamFragment"
+        android:name="com.quieroestarcontigo.shadowwork.ui.dreams.AddDreamFragment"
+        android:label="Add Dream"
+        tools:layout="@layout/fragment_add_dream" />
+</navigation>
