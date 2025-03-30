@@ -35,7 +35,7 @@ object RepositoryModule {
     }
 
     @Provides
-    @Singleton // ✅ ADD THIS
+    @Singleton
     fun provideDreamRepository(
         dreamDao: DreamDao,
         dbApi: SupabaseDatabaseApi,
@@ -45,13 +45,13 @@ object RepositoryModule {
     }
 
     @Provides
-    @Singleton // ✅ ADD THIS
+    @Singleton
     fun provideAudioRepository(
-        audio: AudioRecordDao,
+        dao: AudioRecordDao,
         dbApi: SupabaseDatabaseApi,
         @ApplicationContext context: Context
     ): AudioRepository {
-        return AudioRepository(audio, dbApi, context)
+        return AudioRepository(dao, dbApi, context)
     }
 
     @Provides
