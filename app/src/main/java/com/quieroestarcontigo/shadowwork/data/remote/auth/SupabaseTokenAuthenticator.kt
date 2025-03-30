@@ -1,7 +1,5 @@
 package com.quieroestarcontigo.shadowwork.data.remote.auth
 
-
-import android.util.Log
 import com.quieroestarcontigo.shadowwork.data.session.TokenProvider
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -18,7 +16,6 @@ class SupabaseTokenAuthenticator @Inject constructor(
         val newToken = runBlocking {
             tokenProvider.refreshToken()
         }
-        Log.d("Authenticator", "🔄 New token: $newToken")
 
         return newToken?.let {
             response.request.newBuilder()

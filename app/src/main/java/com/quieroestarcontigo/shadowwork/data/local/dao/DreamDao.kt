@@ -9,7 +9,7 @@ interface DreamDao {
     @Query("SELECT * FROM dreams ORDER BY timestamp DESC")
     fun getAllDreams(): Flow<List<Dream>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(dreams: List<Dream>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
