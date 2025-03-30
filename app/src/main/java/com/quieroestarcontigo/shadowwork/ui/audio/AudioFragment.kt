@@ -9,10 +9,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.quieroestarcontigo.shadowwork.databinding.FragmentAudioBinding
-import com.quieroestarcontigo.shadowwork.data.model.AudioRecord
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -32,6 +33,11 @@ class AudioFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAudioBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         adapter = AudioAdapter(
             onTranscribeClicked = { record -> viewModel.transcribeAudio(record) },
@@ -58,7 +64,7 @@ class AudioFragment : Fragment() {
                 val record = viewModel.stopRecording()
                 if (record != null) {
                     lifecycleScope.launch {
-                        viewModel.saveRecord(record)
+                        viewModel.add(record)
                     }
                     Toast.makeText(requireContext(), "✅ Audio guardado", Toast.LENGTH_SHORT).show()
                 }
@@ -67,11 +73,16 @@ class AudioFragment : Fragment() {
             }
         }
 
-        viewModel.audioRecords.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-        return binding.root
+                launch {
+                    viewModel.records.collect { list ->
+                        adapter.submitList(list)
+                    }
+                }
+            }
+        }
     }
 
     private fun hasMicPermission(): Boolean {

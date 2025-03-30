@@ -3,7 +3,7 @@ package com.quieroestarcontigo.shadowwork.data.session
 import android.content.Context
 import android.util.Log
 import com.quieroestarcontigo.shadowwork.util.SecurePrefs
-import com.quieroestarcontigo.shadowwork.data.local.SessionDao
+import com.quieroestarcontigo.shadowwork.data.local.dao.SessionDao
 import com.quieroestarcontigo.shadowwork.data.model.RefreshRequest
 import com.quieroestarcontigo.shadowwork.data.model.updateSession
 import com.quieroestarcontigo.shadowwork.data.remote.SupabaseRefreshApi

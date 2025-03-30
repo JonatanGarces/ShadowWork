@@ -50,16 +50,6 @@ class DreamRepository @Inject constructor(
         }
     }
 
-    suspend fun syncFromSupabaseToRoom() {
-        try {
-            val remoteDreams = api.getAllDreams()
-            // Optionally map to your Room model if needed
-            dreamDao.insertAll(remoteDreams)
-            Log.d("DreamRepository", "✅ Synced ${remoteDreams.size} dreams from Supabase to Room")
-        } catch (e: Exception) {
-            Log.e("DreamRepository", "❌ Failed to sync dreams from Supabase", e)
-        }
-    }
 
     fun getUnsyncedCount(): Flow<Int> = dreamDao.getUnsyncedCount()
 

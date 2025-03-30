@@ -2,11 +2,10 @@ package com.quieroestarcontigo.shadowwork.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.UUID
 
 @Entity(tableName = "audio_records")
 data class AudioRecord(
-    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val filePath: String,
     val transcription: String = "",
     val timestamp: Long = System.currentTimeMillis(),

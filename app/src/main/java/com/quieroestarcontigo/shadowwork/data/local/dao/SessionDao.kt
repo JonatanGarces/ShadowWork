@@ -1,4 +1,4 @@
-package com.quieroestarcontigo.shadowwork.data.local
+package com.quieroestarcontigo.shadowwork.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

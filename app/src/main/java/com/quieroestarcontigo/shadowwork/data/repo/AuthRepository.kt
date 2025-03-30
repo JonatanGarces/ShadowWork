@@ -4,7 +4,7 @@ package com.quieroestarcontigo.shadowwork.data.repo
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.quieroestarcontigo.shadowwork.util.SecurePrefs
-import com.quieroestarcontigo.shadowwork.data.local.SessionDao
+import com.quieroestarcontigo.shadowwork.data.local.dao.SessionDao
 import com.quieroestarcontigo.shadowwork.data.model.AuthRequest
 import com.quieroestarcontigo.shadowwork.data.model.RefreshRequest
 import com.quieroestarcontigo.shadowwork.data.remote.SupabaseAuthApi

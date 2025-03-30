@@ -3,8 +3,9 @@ package com.quieroestarcontigo.shadowwork.di
 import android.content.Context
 import androidx.room.Room
 import com.quieroestarcontigo.shadowwork.data.local.AppDatabase
+import com.quieroestarcontigo.shadowwork.data.local.dao.AudioRecordDao
 import com.quieroestarcontigo.shadowwork.data.local.dao.DreamDao
-import com.quieroestarcontigo.shadowwork.data.local.SessionDao
+import com.quieroestarcontigo.shadowwork.data.local.dao.SessionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,4 +30,7 @@ object DatabaseModule {
 
     @Provides
     fun provideDreamDao(db: AppDatabase): DreamDao = db.dreamDao()
+
+    @Provides
+    fun provideAudioRecordDao(db: AppDatabase): AudioRecordDao = db.audioDao()
 }

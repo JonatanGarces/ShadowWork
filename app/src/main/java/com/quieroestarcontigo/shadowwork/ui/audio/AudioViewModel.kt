@@ -17,7 +17,7 @@ class AudioViewModel @Inject constructor(
     private val repository: AudioRepository
 ) : ViewModel() {
 
-    val audioRecords: StateFlow<List<AudioRecord>> = repository.getAllRecords().stateIn(
+    val records: StateFlow<List<AudioRecord>> = repository.getAll().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = emptyList()
@@ -39,7 +39,7 @@ class AudioViewModel @Inject constructor(
         return repository.stopRecording()
     }
 
-    fun updateTranscription(id: String, text: String) {
+    fun updateTranscription(id: Int, text: String) {
         viewModelScope.launch {
             repository.updateTranscription(id, text)
         }
@@ -51,17 +51,9 @@ class AudioViewModel @Inject constructor(
         }
     }
 
-    fun add(content: String) {
-        val dream = Dream(
-            content = content,
-            tags = tags.joinToString(","),
-            synced = false,
-            title = "", // optional
-            description = ""
-        )
-
+    fun add(audio: AudioRecord) {
         viewModelScope.launch {
-            repository.insertAudio(dream)
+            repository.insert(audio)
             repository.enqueueSyncWork()
         }
     }
